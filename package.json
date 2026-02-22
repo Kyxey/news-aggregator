@@ -1,0 +1,65 @@
+{
+  "name": "news-aggregator",
+  "version": "1.2.0",
+  "description": "Multi-source news aggregation platform combining NewsAPI, The Guardian, and The New York Times",
+  "private": true,
+  "type": "module",
+  "author": "Ali Azizjahan (Kyxey)",
+  "license": "MIT",
+  "scripts": {
+    "build": "rsbuild build",
+    "dev": "rsbuild dev",
+    "dev:open": "rsbuild dev --open",
+    "preview": "rsbuild preview",
+    "lint": "eslint . --ext .ts,.tsx",
+    "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "format": "prettier --write \"src/**/*.{ts,tsx,css}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,css}\"",
+    "prepare": "husky",
+    "docker:dev": "docker-compose --profile dev up --build",
+    "docker:prod": "docker-compose --profile prod up --build",
+    "docker:dev:down": "docker-compose --profile dev down",
+    "docker:prod:down": "docker-compose --profile prod down"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.90.21",
+    "date-fns": "^4.1.0",
+    "lucide-react": "^0.575.0",
+    "react": "^19.2.3",
+    "react-day-picker": "^9.13.2",
+    "react-dom": "^19.2.3",
+    "react-hook-form": "^7.71.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.3",
+    "@rsbuild/core": "^1.7.1",
+    "@rsbuild/plugin-react": "^1.4.2",
+    "@tailwindcss/postcss": "^4.2.0",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@typescript-eslint/eslint-plugin": "^8.56.0",
+    "@typescript-eslint/parser": "^8.56.0",
+    "autoprefixer": "^10.4.24",
+    "eslint": "^9.39.3",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-interface-to-type": "^1.1.0",
+    "eslint-plugin-prettier": "^5.5.5",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "postcss": "^8.5.6",
+    "prettier": "^3.8.1",
+    "tailwindcss": "^4.2.0",
+    "typescript": "^5.9.3"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{css,json}": [
+      "prettier --write"
+    ]
+  }
+}

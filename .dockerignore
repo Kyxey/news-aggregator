@@ -1,0 +1,17 @@
+node_modules
+dist
+build
+.rsbuild
+.git
+.gitignore
+.env
+.env.local
+*.log
+coverage
+.DS_Store
+*.md
+QUICKSTART.md
+AGENTS.md
+.vscode
+.idea
+.husky

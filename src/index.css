@@ -1,0 +1,25 @@
+@import 'tailwindcss';
+
+body {
+  margin: 0;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
+    'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom DatePicker Styles */
+.rdp-custom {
+  --rdp-accent-color: #3b82f6;
+  --rdp-background-color: #eff6ff;
+}
+
+.rdp-custom .rdp-day_button:hover:not([disabled]) {
+  background-color: var(--rdp-background-color);
+}
+
+.rdp-custom .rdp-day_button:focus-visible {
+  outline: 2px solid var(--rdp-accent-color);
+  outline-offset: 2px;
+}

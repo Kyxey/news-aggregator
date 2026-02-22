@@ -1,0 +1,28 @@
+# Local
+.DS_Store
+*.local
+*.log*
+.env
+.env.local
+
+# Keep environment templates
+!.env.example
+!.env.development
+!.env.production
+
+# Dist
+node_modules
+dist/
+build/
+.rsbuild/
+
+# Profile
+.rspack-profile-*/
+
+# IDE
+.vscode/*
+!.vscode/extensions.json
+.idea
+
+# Testing
+coverage/
