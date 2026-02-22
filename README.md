@@ -16,7 +16,13 @@ A news aggregation platform that pulls articles from multiple sources (NewsAPI, 
   - [Docker Setup](#docker-setup)
     - [Development with Docker](#development-with-docker)
     - [Production with Docker](#production-with-docker)
+  - [Testing](#testing)
+    - [Running Tests](#running-tests)
   - [Scripts](#scripts)
+    - [Development](#development-1)
+    - [Testing](#testing-1)
+    - [Code Quality](#code-quality)
+    - [Docker](#docker)
   - [Project Structure](#project-structure)
   - [Troubleshooting](#troubleshooting)
     - [API Rate Limits](#api-rate-limits)
@@ -112,15 +118,50 @@ Access at: http://localhost:8080
 
 For detailed Docker instructions, see [DOCKER.md](./DOCKER.md)
 
+## Testing
+
+This project uses Vitest and React Testing Library for testing coverage.
+
+### Running Tests
+
+```bash
+# Run tests in watch mode (development)
+pnpm test
+
+# Run tests once (CI/CD)
+pnpm test:run
+
+# Open interactive test UI
+pnpm test:ui
+
+# Generate coverage report
+pnpm test:coverage
+```
+
 ## Scripts
+
+### Development
 
 - **`pnpm dev`**: Start development server
 - **`pnpm build`**: Build for production
 - **`pnpm preview`**: Preview production build
+
+### Testing
+
+- **`pnpm test`**: Run tests in watch mode
+- **`pnpm test:run`**: Run tests once (for CI/CD)
+- **`pnpm test:ui`**: Open Vitest UI for interactive testing
+- **`pnpm test:coverage`**: Generate test coverage report
+
+### Code Quality
+
 - **`pnpm lint`**: Run ESLint
 - **`pnpm lint:fix`**: Fix ESLint errors
 - **`pnpm format`**: Format code with Prettier
 - **`pnpm format:check`**: Check code formatting
+
+### Docker
+
 - **`pnpm docker:dev`**: Start development server on Docker
 - **`pnpm docker:prod`**: Start production server on Docker
 - **`pnpm docker:dev:down`**: Stop development server on Docker
@@ -131,6 +172,7 @@ For detailed Docker instructions, see [DOCKER.md](./DOCKER.md)
 ```
 src/
 ├── components/          # React components
+│   ├── __tests__/              # Component tests
 │   ├── NewsCard.tsx            # Article card (memoized for performance)
 │   ├── NewsCardSkeleton.tsx    # Loading skeleton
 │   ├── SearchForm.tsx          # Search and filter form
@@ -138,16 +180,19 @@ src/
 │   ├── Pagination.tsx          # Page navigation
 │   └── ...
 ├── hooks/               # Custom React hooks
+│   ├── __tests__/              # Hook tests
 │   ├── use-news.ts             # Main news fetching hook with prefetching
 │   ├── use-news-sources.ts     # Fetch available sources/sections
 │   └── use-news-search.ts      # Search-specific hook
 ├── services/            # API clients
+│   ├── __tests__/              # Service tests
 │   ├── news-aggregator.ts      # Main aggregator service
 │   └── clients/
 │       ├── newsapi-client.ts   # NewsAPI integration
 │       ├── guardian-client.ts  # Guardian API integration
 │       └── nytimes-client.ts   # NYT API integration
 ├── lib/                 # Utilities and configurations
+│   ├── __tests__/              # Utility tests
 │   ├── api-error.ts            # Error handling utilities
 │   ├── query-client.ts         # React Query configuration
 │   └── filter-utils.ts         # Filter helper functions
@@ -155,6 +200,12 @@ src/
 │   ├── news.ts                 # News article types
 │   ├── api.ts                  # API response types
 │   └── news-source.ts          # Source interface
+├── test/                # Test utilities
+│   ├── setup.ts                # Global test configuration
+│   ├── test-utils.tsx          # Custom render with providers
+│   ├── mock-data.ts            # Mock data factories
+│   └── README.md               # Testing guide
+├── __tests__/           # App-level integration tests
 ├── App.tsx              # Main app component
 └── index.tsx            # App entry point
 ```
@@ -199,7 +250,6 @@ docker-compose logs -f
 - NewsAPI doesn't support combining category filters with source filters (API limitation)
 - Date range filtering may not work consistently across all sources due to API differences
 - Some Guardian and New York Times articles may not have images (APIs don't always provide them)
-- No automated tests yet
 
 ## License
 

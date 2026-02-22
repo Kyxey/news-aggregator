@@ -40,7 +40,12 @@ const initialFormState: FormState = {
 };
 
 export const SearchForm = ({ onSearch, isLoading = false }: SearchFormProps) => {
-  const { register, handleSubmit, reset } = useForm<SearchFormData>();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { isDirty },
+  } = useForm<SearchFormData>();
   const [showFilters, setShowFilters] = useState(false);
   const [formState, setFormState] = useState<FormState>(initialFormState);
 
@@ -147,20 +152,6 @@ export const SearchForm = ({ onSearch, isLoading = false }: SearchFormProps) => 
     onSearch('', {});
   }, [reset, onSearch]);
 
-  const hasActiveFilters = useMemo(
-    () =>
-      formState.startDate ||
-      formState.endDate ||
-      formState.newsApiCategory ||
-      formState.newsApiSources.length > 0 ||
-      formState.guardianSections.length > 0 ||
-      formState.nytimesDesks.length > 0 ||
-      !formState.newsApiEnabled ||
-      !formState.guardianEnabled ||
-      !formState.nytimesEnabled,
-    [formState]
-  );
-
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full">
       <div className="flex gap-2">
@@ -175,7 +166,7 @@ export const SearchForm = ({ onSearch, isLoading = false }: SearchFormProps) => 
           type="button"
           onClick={() => setShowFilters(!showFilters)}
           className={`flex items-center justify-center rounded-lg px-4 py-2 transition-colors ${
-            hasActiveFilters
+            isDirty
               ? 'bg-blue-100 text-blue-700 hover:bg-blue-200'
               : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
           }`}
