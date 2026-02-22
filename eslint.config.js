@@ -9,7 +9,18 @@ import interfaceToProps from 'eslint-plugin-interface-to-type';
 
 export default [
   {
-    ignores: ['node_modules', 'dist', 'build', '.rsbuild', '*.config.ts', '*.config.js'],
+    ignores: [
+      'node_modules',
+      'dist',
+      'build',
+      '.rsbuild',
+      '*.config.ts',
+      '*.config.js',
+      '**/__tests__/**',
+      '**/*.test.ts',
+      '**/*.test.tsx',
+      'src/test/**',
+    ],
   },
   js.configs.recommended,
   {
