@@ -41,9 +41,9 @@ export const ErrorMessage = ({ error, message, onRetry }: ErrorMessageProps) => 
     <div className="flex min-h-[400px] items-center justify-center" data-testid="error-message">
       <div className="max-w-md rounded-lg bg-red-50 p-6 text-center">
         {renderIcon()}
-        <h3 className="mt-4 text-lg font-semibold text-red-900" data-testid="error-title">
+        <h2 className="mt-4 text-lg font-semibold text-red-900" data-testid="error-title">
           {source ? `${source} Error` : 'Error Loading News'}
-        </h3>
+        </h2>
         <p className="mt-2 text-sm text-red-700" data-testid="error-description">
           {displayMessage}
         </p>

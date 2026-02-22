@@ -58,7 +58,7 @@ export const NewsApiFilter = ({ disabled = false }: NewsApiFilterProps) => {
   return (
     <div className="border-t border-gray-200 pt-4 space-y-3">
       <div className="flex items-center justify-between">
-        <h4 className="text-xs font-semibold text-gray-700 uppercase tracking-wide">NewsAPI</h4>
+        <h3 className="text-xs font-semibold text-gray-700 uppercase tracking-wide">NewsAPI</h3>
         <Controller
           name="newsApiEnabled"
           control={control}

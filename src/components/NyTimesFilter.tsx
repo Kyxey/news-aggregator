@@ -34,9 +34,9 @@ export const NyTimesFilter = ({ disabled = false }: NyTimesFilterProps) => {
   return (
     <div className="border-t border-gray-200 pt-4 space-y-3">
       <div className="flex items-center justify-between">
-        <h4 className="text-xs font-semibold text-gray-700 uppercase tracking-wide">
+        <h3 className="text-xs font-semibold text-gray-700 uppercase tracking-wide">
           The New York Times
-        </h4>
+        </h3>
         <Controller
           name="nytimesEnabled"
           control={control}

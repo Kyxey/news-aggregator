@@ -43,12 +43,12 @@ const NewsCardComponent = ({ article }: NewsCardProps) => {
           </div>
         </div>
 
-        <h3
+        <h2
           className="mb-2 line-clamp-2 text-lg font-semibold text-gray-900"
           data-testid="article-title"
         >
           {article.title}
-        </h3>
+        </h2>
 
         {article.description && (
           <p

@@ -13,9 +13,9 @@ export const DateRangeFilter = ({ disabled = false }: DateRangeFilterProps) => {
 
   return (
     <div className="space-y-4" data-testid="date-range-filter">
-      <h4 className="text-xs font-semibold text-gray-700 uppercase tracking-wide">
+      <h3 className="text-xs font-semibold text-gray-700 uppercase tracking-wide">
         General Filters
-      </h4>
+      </h3>
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div>

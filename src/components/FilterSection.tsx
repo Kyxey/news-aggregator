@@ -16,7 +16,7 @@ export const FilterSection = ({ isLoading, onClearFilters }: FilterSectionProps)
       data-testid="filter-section"
     >
       <div className="mb-3 flex items-center justify-between">
-        <h3 className="text-sm font-semibold text-gray-900">Filters</h3>
+        <h2 className="text-sm font-semibold text-gray-900">Filters</h2>
       </div>
 
       <div className="space-y-6">
