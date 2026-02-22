@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, waitFor } from '@/test/test-utils';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
@@ -18,6 +18,11 @@ import { useNews } from '@/hooks/use-news';
 describe('App', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    vi.stubGlobal('scrollTo', () => {});
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
   });
 
   it('renders the app header', () => {
@@ -31,8 +36,8 @@ describe('App', () => {
 
     render(<App />);
 
-    expect(screen.getByText('News Aggregator')).toBeInTheDocument();
-    expect(screen.getByText(/latest news from/i)).toBeInTheDocument();
+    expect(screen.getByTestId('app-title')).toHaveTextContent('News Aggregator');
+    expect(screen.getByTestId('app-subtitle')).toHaveTextContent(/latest news from/i);
   });
 
   it('displays loading skeletons while fetching', () => {
@@ -46,8 +51,7 @@ describe('App', () => {
 
     render(<App />);
 
-    const skeletons = document.querySelectorAll('.animate-pulse');
-    expect(skeletons.length).toBeGreaterThan(0);
+    expect(screen.getByTestId('loading-skeletons')).toBeInTheDocument();
   });
 
   it('displays news articles when loaded', async () => {
@@ -83,7 +87,8 @@ describe('App', () => {
 
     render(<App />);
 
-    expect(screen.getByText(/error loading news/i)).toBeInTheDocument();
+    expect(screen.getByTestId('error-message')).toBeInTheDocument();
+    expect(screen.getByTestId('error-title')).toHaveTextContent(/error loading news/i);
   });
 
   it('shows empty state when no articles found', () => {
@@ -97,6 +102,7 @@ describe('App', () => {
 
     render(<App />);
 
+    expect(screen.getByTestId('empty-state')).toBeInTheDocument();
     expect(screen.getByText(/no news articles found/i)).toBeInTheDocument();
   });
 
@@ -112,8 +118,9 @@ describe('App', () => {
 
     render(<App />);
 
-    expect(screen.getByText(/previous/i)).toBeInTheDocument();
-    expect(screen.getByText(/next/i)).toBeInTheDocument();
+    expect(screen.getByTestId('pagination')).toBeInTheDocument();
+    expect(screen.getByTestId('previous-button')).toBeInTheDocument();
+    expect(screen.getByTestId('next-button')).toBeInTheDocument();
   });
 
   it('clears search and filters when clear all is clicked', async () => {
@@ -130,10 +137,10 @@ describe('App', () => {
 
     render(<App />);
 
-    const searchInput = screen.getByPlaceholderText(/search news/i);
+    const searchInput = screen.getByTestId('search-input');
     await user.type(searchInput, 'test query');
 
-    const searchButton = screen.getByLabelText(/^search$/i);
+    const searchButton = screen.getByTestId('search-button');
     await user.click(searchButton);
 
     await waitFor(() => {
@@ -159,7 +166,7 @@ describe('App', () => {
 
     render(<App />);
 
-    const nextButton = screen.getByText(/next/i);
+    const nextButton = screen.getByTestId('next-button');
     await user.click(nextButton);
 
     await waitFor(() => {

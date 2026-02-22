@@ -8,32 +8,29 @@ describe('Pagination', () => {
     const onPageChange = vi.fn();
     render(<Pagination currentPage={1} onPageChange={onPageChange} hasMore={true} />);
 
-    expect(screen.getByText(/previous/i)).toBeInTheDocument();
-    expect(screen.getByText(/next/i)).toBeInTheDocument();
+    expect(screen.getByTestId('previous-button')).toBeInTheDocument();
+    expect(screen.getByTestId('next-button')).toBeInTheDocument();
   });
 
   it('disables previous button on first page', () => {
     const onPageChange = vi.fn();
     render(<Pagination currentPage={1} onPageChange={onPageChange} hasMore={true} />);
 
-    const prevButton = screen.getByText(/previous/i).closest('button');
-    expect(prevButton).toBeDisabled();
+    expect(screen.getByTestId('previous-button')).toBeDisabled();
   });
 
   it('enables previous button when not on first page', () => {
     const onPageChange = vi.fn();
     render(<Pagination currentPage={2} onPageChange={onPageChange} hasMore={true} />);
 
-    const prevButton = screen.getByText(/previous/i).closest('button');
-    expect(prevButton).not.toBeDisabled();
+    expect(screen.getByTestId('previous-button')).not.toBeDisabled();
   });
 
   it('disables next button when hasMore is false', () => {
     const onPageChange = vi.fn();
     render(<Pagination currentPage={1} onPageChange={onPageChange} hasMore={false} />);
 
-    const nextButton = screen.getByText(/next/i).closest('button');
-    expect(nextButton).toBeDisabled();
+    expect(screen.getByTestId('next-button')).toBeDisabled();
   });
 
   it('calls onPageChange with previous page when previous is clicked', async () => {
@@ -41,8 +38,7 @@ describe('Pagination', () => {
     const onPageChange = vi.fn();
     render(<Pagination currentPage={3} onPageChange={onPageChange} hasMore={true} />);
 
-    const prevButton = screen.getByText(/previous/i);
-    await user.click(prevButton);
+    await user.click(screen.getByTestId('previous-button'));
 
     expect(onPageChange).toHaveBeenCalledWith(2);
   });
@@ -52,8 +48,7 @@ describe('Pagination', () => {
     const onPageChange = vi.fn();
     render(<Pagination currentPage={1} onPageChange={onPageChange} hasMore={true} />);
 
-    const nextButton = screen.getByText(/next/i);
-    await user.click(nextButton);
+    await user.click(screen.getByTestId('next-button'));
 
     expect(onPageChange).toHaveBeenCalledWith(2);
   });
@@ -62,6 +57,6 @@ describe('Pagination', () => {
     const onPageChange = vi.fn();
     render(<Pagination currentPage={5} onPageChange={onPageChange} hasMore={true} />);
 
-    expect(screen.getByText(/page 5/i)).toBeInTheDocument();
+    expect(screen.getByTestId('current-page')).toHaveTextContent('Page 5');
   });
 });

@@ -120,6 +120,7 @@ const FilterBadgesComponent = ({
       <button
         onClick={onClearAll}
         className="inline-flex items-center gap-1 rounded-md bg-gray-100 px-2 py-1 text-xs font-medium text-gray-700 transition-colors hover:bg-gray-200"
+        data-testid="clear-all-filters-button"
       >
         Clear all
         <X className="h-3 w-3" />

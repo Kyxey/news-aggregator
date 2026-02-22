@@ -38,17 +38,20 @@ export const ErrorMessage = ({ error, message, onRetry }: ErrorMessageProps) => 
   };
 
   return (
-    <div className="flex min-h-[400px] items-center justify-center">
+    <div className="flex min-h-[400px] items-center justify-center" data-testid="error-message">
       <div className="max-w-md rounded-lg bg-red-50 p-6 text-center">
         {renderIcon()}
-        <h3 className="mt-4 text-lg font-semibold text-red-900">
+        <h3 className="mt-4 text-lg font-semibold text-red-900" data-testid="error-title">
           {source ? `${source} Error` : 'Error Loading News'}
         </h3>
-        <p className="mt-2 text-sm text-red-700">{displayMessage}</p>
+        <p className="mt-2 text-sm text-red-700" data-testid="error-description">
+          {displayMessage}
+        </p>
         {onRetry && (
           <button
             onClick={onRetry}
             className="mt-4 inline-flex items-center gap-2 rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-red-700"
+            data-testid="retry-button"
           >
             <RefreshCw className="h-4 w-4" />
             Try Again

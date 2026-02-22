@@ -12,8 +12,8 @@ describe('NewsCard', () => {
 
     render(<NewsCard article={article} />);
 
-    expect(screen.getByText('Breaking News Story')).toBeInTheDocument();
-    expect(screen.getByText(/detailed description/i)).toBeInTheDocument();
+    expect(screen.getByTestId('article-title')).toHaveTextContent('Breaking News Story');
+    expect(screen.getByTestId('article-description')).toHaveTextContent(/detailed description/i);
   });
 
   it('displays article source', () => {
@@ -21,7 +21,7 @@ describe('NewsCard', () => {
 
     render(<NewsCard article={article} />);
 
-    expect(screen.getByText('The Guardian')).toBeInTheDocument();
+    expect(screen.getByTestId('article-source')).toHaveTextContent('The Guardian');
   });
 
   it('formats and displays publication date', () => {
@@ -31,7 +31,7 @@ describe('NewsCard', () => {
 
     render(<NewsCard article={article} />);
 
-    expect(screen.getByText(/jan 15, 2024/i)).toBeInTheDocument();
+    expect(screen.getByTestId('article-date')).toHaveTextContent(/jan 15, 2024/i);
   });
 
   it('displays author when provided', () => {
@@ -39,7 +39,7 @@ describe('NewsCard', () => {
 
     render(<NewsCard article={article} />);
 
-    expect(screen.getByText('Jane Smith')).toBeInTheDocument();
+    expect(screen.getByTestId('article-author')).toHaveTextContent('Jane Smith');
   });
 
   it('does not display author section when author is missing', () => {
@@ -47,8 +47,7 @@ describe('NewsCard', () => {
 
     render(<NewsCard article={article} />);
 
-    const userIcon = document.querySelector('svg[class*="lucide-user"]');
-    expect(userIcon).not.toBeInTheDocument();
+    expect(screen.queryByTestId('article-author')).not.toBeInTheDocument();
   });
 
   it('renders image when imageUrl is provided', () => {
@@ -59,7 +58,7 @@ describe('NewsCard', () => {
 
     render(<NewsCard article={article} />);
 
-    const image = screen.getByAltText('Article with Image');
+    const image = screen.getByTestId('article-image');
     expect(image).toBeInTheDocument();
     expect(image).toHaveAttribute('src', 'https://example.com/image.jpg');
   });
@@ -69,8 +68,7 @@ describe('NewsCard', () => {
 
     render(<NewsCard article={article} />);
 
-    const cameraIcon = document.querySelector('svg[class*="lucide-camera-off"]');
-    expect(cameraIcon).toBeInTheDocument();
+    expect(screen.getByTestId('article-no-image')).toBeInTheDocument();
   });
 
   it('renders read more link with correct href', () => {
@@ -80,7 +78,7 @@ describe('NewsCard', () => {
 
     render(<NewsCard article={article} />);
 
-    const link = screen.getByText(/read more/i).closest('a');
+    const link = screen.getByTestId('article-link');
     expect(link).toHaveAttribute('href', 'https://example.com/article/123');
     expect(link).toHaveAttribute('target', '_blank');
     expect(link).toHaveAttribute('rel', 'noopener noreferrer');
@@ -94,7 +92,7 @@ describe('NewsCard', () => {
 
     render(<NewsCard article={article} />);
 
-    const image = screen.getByAltText('Test Article');
+    const image = screen.getByTestId('article-image');
     expect(image).toHaveAttribute('loading', 'lazy');
   });
 });

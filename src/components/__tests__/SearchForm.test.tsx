@@ -20,9 +20,9 @@ describe('SearchForm', () => {
     const onSearch = vi.fn();
     render(<SearchForm onSearch={onSearch} />);
 
-    expect(screen.getByPlaceholderText(/search news/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/toggle filters/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/^search$/i)).toBeInTheDocument();
+    expect(screen.getByTestId('search-input')).toBeInTheDocument();
+    expect(screen.getByTestId('toggle-filters-button')).toBeInTheDocument();
+    expect(screen.getByTestId('search-button')).toBeInTheDocument();
   });
 
   it('calls onSearch with query when form is submitted', async () => {
@@ -30,9 +30,9 @@ describe('SearchForm', () => {
     const onSearch = vi.fn();
     render(<SearchForm onSearch={onSearch} />);
 
-    const input = screen.getByPlaceholderText(/search news/i);
+    const input = screen.getByTestId('search-input');
     await user.type(input, 'artificial intelligence');
-    await user.click(screen.getByLabelText(/^search$/i));
+    await user.click(screen.getByTestId('search-button'));
 
     await waitFor(() => {
       expect(onSearch).toHaveBeenCalledWith('artificial intelligence', expect.any(Object));
@@ -44,7 +44,7 @@ describe('SearchForm', () => {
     const onSearch = vi.fn();
     render(<SearchForm onSearch={onSearch} />);
 
-    const filterButton = screen.getByLabelText(/toggle filters/i);
+    const filterButton = screen.getByTestId('toggle-filters-button');
 
     expect(screen.queryByText(/general filters/i)).not.toBeInTheDocument();
 
@@ -59,8 +59,8 @@ describe('SearchForm', () => {
     const onSearch = vi.fn();
     render(<SearchForm onSearch={onSearch} isLoading={true} />);
 
-    expect(screen.getByPlaceholderText(/search news/i)).toBeDisabled();
-    expect(screen.getByLabelText(/^search$/i)).toBeDisabled();
+    expect(screen.getByTestId('search-input')).toBeDisabled();
+    expect(screen.getByTestId('search-button')).toBeDisabled();
   });
 
   it('trims whitespace from search query', async () => {
@@ -68,9 +68,9 @@ describe('SearchForm', () => {
     const onSearch = vi.fn();
     render(<SearchForm onSearch={onSearch} />);
 
-    const input = screen.getByPlaceholderText(/search news/i);
+    const input = screen.getByTestId('search-input');
     await user.type(input, '  climate change  ');
-    await user.click(screen.getByLabelText(/^search$/i));
+    await user.click(screen.getByTestId('search-button'));
 
     await waitFor(() => {
       expect(onSearch).toHaveBeenCalledWith('climate change', expect.any(Object));
@@ -82,7 +82,7 @@ describe('SearchForm', () => {
     const onSearch = vi.fn();
     render(<SearchForm onSearch={onSearch} />);
 
-    await user.click(screen.getByLabelText(/^search$/i));
+    await user.click(screen.getByTestId('search-button'));
 
     await waitFor(() => {
       expect(onSearch).toHaveBeenCalledWith(

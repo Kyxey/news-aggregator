@@ -161,6 +161,7 @@ export const SearchForm = ({ onSearch, isLoading = false }: SearchFormProps) => 
           placeholder="Search news across all sources..."
           className="flex-1 rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
           disabled={isLoading}
+          data-testid="search-input"
         />
         <button
           type="button"
@@ -171,6 +172,7 @@ export const SearchForm = ({ onSearch, isLoading = false }: SearchFormProps) => 
               : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
           }`}
           aria-label="Toggle filters"
+          data-testid="toggle-filters-button"
         >
           <Filter className="h-5 w-5" />
         </button>
@@ -179,6 +181,7 @@ export const SearchForm = ({ onSearch, isLoading = false }: SearchFormProps) => 
           disabled={isLoading}
           className="flex items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
           aria-label="Search"
+          data-testid="search-button"
         >
           <Search className="h-5 w-5" />
         </button>

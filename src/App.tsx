@@ -149,15 +149,18 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <header className="bg-white shadow">
+      <header className="bg-white shadow" data-testid="app-header">
         <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3">
             <Newspaper className="h-8 w-8 text-blue-600" />
             <div className="flex-1">
-              <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+              <h1
+                className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl"
+                data-testid="app-title"
+              >
                 News Aggregator
               </h1>
-              <p className="mt-1 text-sm text-gray-600">
+              <p className="mt-1 text-sm text-gray-600" data-testid="app-subtitle">
                 Latest news from NewsAPI, The Guardian, and The New York Times
               </p>
             </div>
@@ -178,7 +181,7 @@ const App = () => {
         </div>
 
         {isLoading && (
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" data-testid="loading-skeletons">
             {Array.from({ length: PAGE_SIZE / 3 }).map((_, i) => (
               <NewsCardSkeleton key={i} />
             ))}
@@ -189,14 +192,14 @@ const App = () => {
 
         {!isLoading && !isError && articles && (
           <>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" data-testid="articles-grid">
               {articles.map(article => (
                 <NewsCard key={article.id} article={article} />
               ))}
             </div>
 
             {articles.length === 0 && (
-              <div className="py-12 text-center text-gray-500">
+              <div className="py-12 text-center text-gray-500" data-testid="empty-state">
                 <SearchX className="w-14 h-14 mx-auto" />
                 <p>
                   {hasActiveFilters
