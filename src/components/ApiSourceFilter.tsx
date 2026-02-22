@@ -4,21 +4,18 @@ import { Switch } from './Switch';
 import { CheckboxList } from './CheckboxList';
 import { NEWSAPI_CATEGORIES, NYTIMES_DESKS } from '@/lib/filter-constants';
 import { toggleArraySelection, toggleItemInArray } from '@/lib/filter-utils';
-import type { NewsAPISource, GuardianSection } from '@/types/news';
+import { useNewsAPISources, useGuardianSections } from '@/hooks/use-news-sources';
+import type { NewsAPICategory, NYTimesDesk } from '@/types/news';
 import type { SearchFormData } from './SearchForm';
 
 type NewsApiFilterProps = {
-  sources: NewsAPISource[];
-  loadingSources: boolean;
   disabled?: boolean;
 };
 
-export const NewsApiFilter = ({
-  sources,
-  loadingSources,
-  disabled = false,
-}: NewsApiFilterProps) => {
+export const NewsApiFilter = ({ disabled = false }: NewsApiFilterProps) => {
   const { control, watch, setValue } = useFormContext<SearchFormData>();
+  const { data: sources = [], isLoading: loadingSources } = useNewsAPISources();
+
   const enabled = watch('newsApiEnabled');
   const category = watch('newsApiCategory');
   const selectedSources = watch('newsApiSources');
@@ -28,7 +25,9 @@ export const NewsApiFilter = ({
 
   const handleCategoryChange = useCallback(
     (newCategory?: string) => {
-      setValue('newsApiCategory', newCategory as any, { shouldDirty: true });
+      setValue('newsApiCategory', newCategory as NewsAPICategory | undefined, {
+        shouldDirty: true,
+      });
       if (newCategory) {
         // NewsAPI doesn't allow category + sources in the same request
         setValue('newsApiSources', [], { shouldDirty: true });
@@ -135,17 +134,13 @@ export const NewsApiFilter = ({
 };
 
 type GuardianFilterProps = {
-  sections: GuardianSection[];
-  loadingSections: boolean;
   disabled?: boolean;
 };
 
-export const GuardianFilter = ({
-  sections,
-  loadingSections,
-  disabled = false,
-}: GuardianFilterProps) => {
+export const GuardianFilter = ({ disabled = false }: GuardianFilterProps) => {
   const { control, watch, setValue } = useFormContext<SearchFormData>();
+  const { data: sections = [], isLoading: loadingSections } = useGuardianSections();
+
   const enabled = watch('guardianEnabled');
   const selectedSections = watch('guardianSections');
 
@@ -207,8 +202,8 @@ export const NyTimesFilter = ({ disabled = false }: NyTimesFilterProps) => {
 
   const handleDeskToggle = useCallback(
     (desk: string) => {
-      const newDesks = toggleItemInArray(selectedDesks, desk);
-      setValue('nytimesDesks', newDesks, { shouldDirty: true });
+      const newDesks = toggleItemInArray(selectedDesks, desk as NYTimesDesk);
+      setValue('nytimesDesks', newDesks as NYTimesDesk[], { shouldDirty: true });
     },
     [selectedDesks, setValue]
   );
@@ -217,7 +212,7 @@ export const NyTimesFilter = ({ disabled = false }: NyTimesFilterProps) => {
 
   const handleDeskToggleAll = useCallback(() => {
     const newDesks = toggleArraySelection(selectedDesks, deskValues);
-    setValue('nytimesDesks', newDesks, { shouldDirty: true });
+    setValue('nytimesDesks', newDesks as NYTimesDesk[], { shouldDirty: true });
   }, [selectedDesks, deskValues, setValue]);
 
   return (

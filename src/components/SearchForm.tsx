@@ -2,7 +2,6 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { Search, Filter } from 'lucide-react';
 import { useState, useCallback } from 'react';
 import { FilterSection } from './FilterSection';
-import { useNewsAPISources, useGuardianSections } from '@/hooks/use-news-sources';
 import type { NewsFilters, NewsAPICategory, NYTimesDesk } from '@/types/news';
 
 export type SearchFormData = {
@@ -48,9 +47,6 @@ export const SearchForm = ({ onSearch, isLoading = false }: SearchFormProps) => 
   } = methods;
 
   const [showFilters, setShowFilters] = useState(false);
-
-  const { data: newsApiSources = [], isLoading: loadingNewsApiSources } = useNewsAPISources();
-  const { data: guardianSections = [], isLoading: loadingSections } = useGuardianSections();
 
   const onSubmit = useCallback(
     (data: SearchFormData) => {
@@ -120,16 +116,7 @@ export const SearchForm = ({ onSearch, isLoading = false }: SearchFormProps) => 
           </button>
         </div>
 
-        {showFilters && (
-          <FilterSection
-            newsApiSources={newsApiSources}
-            guardianSections={guardianSections}
-            loadingNewsApiSources={loadingNewsApiSources}
-            loadingSections={loadingSections}
-            isLoading={isLoading}
-            onClearFilters={handleClearFilters}
-          />
-        )}
+        {showFilters && <FilterSection isLoading={isLoading} onClearFilters={handleClearFilters} />}
       </form>
     </FormProvider>
   );

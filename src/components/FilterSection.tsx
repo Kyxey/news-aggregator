@@ -1,25 +1,13 @@
 import { X } from 'lucide-react';
 import { DateRangeFilter } from './DateRangeFilter';
 import { NewsApiFilter, GuardianFilter, NyTimesFilter } from './ApiSourceFilter';
-import type { NewsAPISource, GuardianSection } from '@/types/news';
 
 type FilterSectionProps = {
-  newsApiSources: NewsAPISource[];
-  guardianSections: GuardianSection[];
-  loadingNewsApiSources: boolean;
-  loadingSections: boolean;
   isLoading: boolean;
   onClearFilters: () => void;
 };
 
-export const FilterSection = ({
-  newsApiSources,
-  guardianSections,
-  loadingNewsApiSources,
-  loadingSections,
-  isLoading,
-  onClearFilters,
-}: FilterSectionProps) => {
+export const FilterSection = ({ isLoading, onClearFilters }: FilterSectionProps) => {
   return (
     <div
       className="mt-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm"
@@ -32,17 +20,9 @@ export const FilterSection = ({
       <div className="space-y-6">
         <DateRangeFilter disabled={isLoading} />
 
-        <NewsApiFilter
-          sources={newsApiSources}
-          loadingSources={loadingNewsApiSources}
-          disabled={isLoading}
-        />
+        <NewsApiFilter disabled={isLoading} />
 
-        <GuardianFilter
-          sections={guardianSections}
-          loadingSections={loadingSections}
-          disabled={isLoading}
-        />
+        <GuardianFilter disabled={isLoading} />
 
         <NyTimesFilter disabled={isLoading} />
 
