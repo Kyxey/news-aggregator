@@ -34,7 +34,7 @@ A news aggregation platform that pulls articles from multiple sources (NewsAPI, 
 
 ## Tech Stack
 
-- React 19
+- React
 - TypeScript
 - RSBuild
 - Tailwind CSS
@@ -49,8 +49,8 @@ A news aggregation platform that pulls articles from multiple sources (NewsAPI, 
 
 ### Prerequisites
 
-- Node.js 18+ (tested on 18.x and 20.x)
-- pnpm 8+ (or npm/yarn if you prefer)
+- Node.js 22 (tested with 22.13.1)
+- pnpm 10 (tested with 10.14.0)
 - API keys for:
   - [NewsAPI](https://newsapi.org/) (free tier works)
   - [The Guardian](https://open-platform.theguardian.com/)
