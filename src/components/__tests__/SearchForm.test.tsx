@@ -46,13 +46,13 @@ describe('SearchForm', () => {
 
     const filterButton = screen.getByTestId('toggle-filters-button');
 
-    expect(screen.queryByText(/general filters/i)).not.toBeInTheDocument();
+    expect(screen.queryByTestId('filter-section')).not.toBeInTheDocument();
 
     await user.click(filterButton);
-    expect(screen.getByText(/general filters/i)).toBeInTheDocument();
+    expect(screen.getByTestId('filter-section')).toBeInTheDocument();
 
     await user.click(filterButton);
-    expect(screen.queryByText(/general filters/i)).not.toBeInTheDocument();
+    expect(screen.queryByTestId('filter-section')).not.toBeInTheDocument();
   });
 
   it('disables inputs when loading', () => {

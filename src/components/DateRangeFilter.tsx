@@ -12,7 +12,7 @@ export const DateRangeFilter = ({ disabled = false }: DateRangeFilterProps) => {
   const today = new Date();
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4" data-testid="date-range-filter">
       <h4 className="text-xs font-semibold text-gray-700 uppercase tracking-wide">
         General Filters
       </h4>

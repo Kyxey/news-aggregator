@@ -67,8 +67,10 @@ describe('App', () => {
     render(<App />);
 
     await waitFor(() => {
-      mockArticles.forEach(article => {
-        expect(screen.getByText(article.title)).toBeInTheDocument();
+      const articleTitles = screen.getAllByTestId('article-title');
+      expect(articleTitles).toHaveLength(3);
+      mockArticles.forEach((article, index) => {
+        expect(articleTitles[index]).toHaveTextContent(article.title);
       });
     });
   });
