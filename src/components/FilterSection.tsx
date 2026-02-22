@@ -1,6 +1,8 @@
 import { X } from 'lucide-react';
 import { DateRangeFilter } from './DateRangeFilter';
-import { NewsApiFilter, GuardianFilter, NyTimesFilter } from './ApiSourceFilter';
+import { NewsApiFilter } from './NewsApiFilter';
+import { GuardianFilter } from './GuardianFilter';
+import { NyTimesFilter } from './NyTimesFilter';
 
 type FilterSectionProps = {
   isLoading: boolean;
