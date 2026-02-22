@@ -4,6 +4,28 @@ A news aggregation platform that pulls articles from multiple sources (NewsAPI, 
 
 ## Table of Contents
 
+- [News Aggregator](#news-aggregator)
+  - [Table of Contents](#table-of-contents)
+  - [Tech Stack](#tech-stack)
+  - [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Installation](#installation)
+    - [Environment Setup](#environment-setup)
+    - [Development](#development)
+    - [Build](#build)
+  - [Docker Setup](#docker-setup)
+    - [Development with Docker](#development-with-docker)
+    - [Production with Docker](#production-with-docker)
+  - [Scripts](#scripts)
+  - [Project Structure](#project-structure)
+  - [Troubleshooting](#troubleshooting)
+    - [API Rate Limits](#api-rate-limits)
+    - [CORS Issues](#cors-issues)
+    - [Build Errors](#build-errors)
+    - [Docker Issues](#docker-issues)
+  - [Known Issues](#known-issues)
+  - [License](#license)
+
 ## Tech Stack
 
 - React 19
