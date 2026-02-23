@@ -7,23 +7,33 @@ type ErrorMessageProps = {
   onRetry?: () => void;
 };
 
-export const ErrorMessage = ({ error, message, onRetry }: ErrorMessageProps) => {
-  let displayMessage = message || 'An unexpected error occurred';
-  let statusCode = 0;
-  let source = '';
-
+const getErrorInfo = (
+  error?: unknown
+): Partial<{ displayMessage: string; statusCode: number; source: string }> => {
   if (error && isApiError(error)) {
-    displayMessage = error.userMessage;
-    statusCode = error.statusCode;
-    source = error.source;
-  } else if (error instanceof Error) {
-    displayMessage = error.message;
+    return {
+      displayMessage: error.userMessage,
+      statusCode: error.statusCode,
+      source: error.source,
+    };
   }
+
+  if (error instanceof Error) {
+    return { displayMessage: error.message };
+  }
+
+  return {};
+};
+
+export const ErrorMessage = ({ error, message, onRetry }: ErrorMessageProps) => {
+  const errorInfo = getErrorInfo(error);
+
+  const messageText = errorInfo.displayMessage || message || 'An unexpected error occurred.';
 
   const renderIcon = () => {
     const iconClass = 'mx-auto h-12 w-12 text-red-600';
 
-    switch (statusCode) {
+    switch (errorInfo.statusCode) {
       case 401:
         return <Key className={iconClass} />;
       case 429:
@@ -42,10 +52,10 @@ export const ErrorMessage = ({ error, message, onRetry }: ErrorMessageProps) => 
       <div className="max-w-md rounded-lg bg-red-50 p-6 text-center">
         {renderIcon()}
         <h2 className="mt-4 text-lg font-semibold text-red-900" data-testid="error-title">
-          {source ? `${source} Error` : 'Error Loading News'}
+          {errorInfo.source ? `${errorInfo.source} Error` : 'Error Loading News'}
         </h2>
         <p className="mt-2 text-sm text-red-700" data-testid="error-description">
-          {displayMessage}
+          {messageText}
         </p>
         {onRetry && (
           <button
