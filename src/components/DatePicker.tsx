@@ -39,7 +39,7 @@ export function DatePicker({
     <div className="relative">
       <button
         type="button"
-        onClick={() => !disabled && setIsOpen(!isOpen)}
+        onClick={() => setIsOpen(!isOpen)}
         disabled={disabled}
         className={`flex w-full items-center justify-between rounded-lg border px-4 py-2 text-left transition-colors ${
           error

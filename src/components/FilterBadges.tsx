@@ -54,7 +54,7 @@ const FilterBadgesComponent = ({
           label="From"
           value={filters.startDate.toLocaleDateString()}
           onClear={() => onClearFilter('startDate')}
-          colorClass="bg-green-100 text-green-700 hover:bg-green-200"
+          variant="green"
         />
       )}
 
@@ -63,7 +63,7 @@ const FilterBadgesComponent = ({
           label="To"
           value={filters.endDate.toLocaleDateString()}
           onClear={() => onClearFilter('endDate')}
-          colorClass="bg-green-100 text-green-700 hover:bg-green-200"
+          variant="green"
         />
       )}
 
@@ -93,7 +93,7 @@ const FilterBadgesComponent = ({
               filters.apiFilters.guardian.sections.length > 1 ? 's' : ''
             }`}
             onClear={() => onClearFilter('guardian-sections')}
-            colorClass="bg-orange-100 text-orange-700 hover:bg-orange-200"
+            variant="orange"
           />
         )}
 
@@ -104,7 +104,7 @@ const FilterBadgesComponent = ({
             filters.apiFilters.nytimes.desks.length > 1 ? 's' : ''
           }`}
           onClear={() => onClearFilter('nytimes-desks')}
-          colorClass="bg-indigo-100 text-indigo-700 hover:bg-indigo-200"
+          variant="indigo"
         />
       )}
 
@@ -113,7 +113,7 @@ const FilterBadgesComponent = ({
           label="NYT Author"
           value={filters.apiFilters.nytimes.author}
           onClear={() => onClearFilter('nytimes-author')}
-          colorClass="bg-pink-100 text-pink-700 hover:bg-pink-200"
+          variant="pink"
         />
       )}
 
